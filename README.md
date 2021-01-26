@@ -8,7 +8,7 @@ Snoopy is moved horizontally by cursor.
 
 
 ## MVP
-- ball is kicked under fixed angel at random position with random speed from the top.
+- ball is kicked under random angel at random position with random speed from the top.
 - When the ball touches the sides, he will be reflected by double speed.
 - Score is within the screen.
 - Number of balls per game to be defined in player screen
@@ -19,13 +19,13 @@ Snoopy is moved horizontally by cursor.
 
  ## Data structure
 
-# main.js
+# main
 
 - buildSplashScreen () {}
 - buildGameScreen () {}
 - buildGameOverScreen () {}
 
-# game.js
+# game
 
 - Game () {}
 - startLoop () {}
@@ -35,40 +35,38 @@ Snoopy is moved horizontally by cursor.
 - drawCanvas () {}
 - GameOver () {}
 
-# snoopy.js 
+# snoopy 
 
 - Snoopy () {
-    this.x;
-    this.y;
-    this.direction;
-    this.size
+   img
+   x, y, incrX
 }
 - draw () {}
 - move () {}
-- checkBootomCollision () {}
 
-# CharlieAndSnoopy.js 
 
-- CharlieBrown () {
-    this.x;
-    this.angle;
-    this.startingspeed
+# Charliebrown 
+
+- CharlieBrown
+    img
+   rdm(x), rdm(y)
 }
 
 - draw () {}
-- move () {}
+- rdm pos
 
-# Soccerball.js 
+# Soccerball
 
-- Soccerball () {
-    this.x;
-    this.y;
-    this.angle;
-    this.size
+- ball () {
+     img
+   x, y, rdm(incrX) , rdm(incrY)
 }
 - draw () {}
 - move () {}
-- checkCollisionSides () {}
+- 
+# Collision conditions
+sidewalls (double speed and change direction)
+collision ball - snoopy -> increse score
 
 
 ## States y States Transitions
@@ -96,8 +94,7 @@ Snoopy is moved horizontally by cursor.
 
 ## Links
 
-- [Trello Link](https://trello.com)
+- [Trello Link]https://docs.google.com/document/d/12G5tHbEu6s--BN-zE7DA7JGM7Z60e39XyNXbCdl5waE/edit?usp=sharing
 - [Slides Link](http://slides.com)
-- [Github repository Link](http://github.com)
+- [Github repository Link](https://github.com/MattBrwn/Snoopy-s-Running)
 - [Deployment Link](http://github.com)''# Snoopy-s-Running
-Game Project Snoopy's Running
