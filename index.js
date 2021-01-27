@@ -12,12 +12,12 @@ let charliebrownY = 2;
 let ballX = charliebrownX + 40;
 let ballY = charliebrownY + 48;
 let ballWidth = 20;
-let ballincrementX = (Math.round(Math.random(1)) * 2 - 1) * (1.5 + (Math.random(2)));
-let ballincrementY = 2 + Math.random(2.5);
+let ballincrementX = (Math.round(Math.random(1)) * 2 - 1) * (2 + (Math.random(1.5)));
+let ballincrementY = 2.5 + Math.random(1);
 
 let snoopyX = 400 * Math.random();
 let snoopyY = 735;
-let snoopyWidth = 40;
+let snoopyWidth = 60;
 let incrementxSnoopy = 5;
 
 let isLeftArrow = false;
@@ -35,10 +35,16 @@ let snoopyImg = new Image();
     snoopyImg.src = './images/Kopie von Snoopy running left.png'
 
 
-let kickingSound = document.getElementById('sound')
+// let kickingSound = document.getElementById('sound')
+
+// Def different screens for transition
+let startscreen = document.getElementById('startscreen')
+let gameOverscreen = document.getElementById('gameoverscreen')
+let gameWinscreen = document.getElementById('gamewinscreen')
+
 
 let startBtn = document.querySelector('#startgame')
-let restartBtn = document.querySelector('#restartgame')
+let restartBtn = document.querySelector('#startgame')
 
 document.addEventListener('keydown', (event) => {
     
@@ -73,14 +79,15 @@ function ballCollision(){
     }
     
     //check for bottom
-    if (ballY > canvas.height-65) {
+    if (ballY >= canvas.height-40) {
         // something here 
-        if (ballX + ballWidth > snoopyX && ballX > snoopyX + snoopyWidth || ballX < snoopyX + snoopyWidth && ballX +ballwidth < snoopyX) {
-            score++
+        if (ballX + ballWidth > snoopyX && ballX > snoopyX + snoopyWidth || ballX < snoopyX + snoopyWidth && ballX +ballWidth < snoopyX) {
+            clearInterval(intervalID)
+            gameOver()
         }
         else {
             clearInterval(intervalID)
-            gameOver()
+            gameWin()
         }
     }
 
@@ -101,12 +108,13 @@ function drawBall(){
 
 function draw(){
     ctx.clearRect(0, 0, canvas.width, canvas.height) 
+    ctx.font = '24px Verdana'
+    ctx.fillText('Score:' + score, 20, 20)
     drawCharliebrown()
     drawBall()
     drawSnoopy()
     ballCollision()
-    ctx.font = '24px Verdana'
-    ctx.fillText('Score:' + score, 20, 20)
+    
     
     // movement Snoopy
     if (isRightArrow && (snoopyX < canvas.width)) {
@@ -124,49 +132,83 @@ function draw(){
 function startGame(){
     canvas.style.display = 'block'
     startBtn.style.display = 'none'
+    startscreen.style.display = "none"
+    gameOverscreen.style.display = "none"
+    gameWinscreen.style.display = "none"
+    
+    
     intervalID = setInterval(() => {
         requestAnimationFrame(draw)
     }, 10)
 }
-
-
-
-
 
 function gameOver(){
     canvas.style.display = 'none'
+    startscreen.style.display = "none"
+    /*
     gameOverScreen = document.createElement('div')
-    gameOverScreen.classList.add('gameOverScr')
+    gameOverScreen.classList.add('gameOverScreen')
     gameOverScreen.innerHTML = `<h1>GAME OVER</h1>
-    <button id="startgame">RESTART GAME</button>   `
+    <button id="startgame">RESTART GAME</button> `
     body.appendChild(gameOverScreen)
+    body.removeChild(header)
     body.removeChild(button)
-    body.removeChild(h1)
-    // body.removeChild(button)
+    */
+    gameOverscreen.style.display = "block"
+    gameWinscreen.style.display = "none"
     startBtn.style.display = 'block'
-    intervalID = setInterval(() => {
-        requestAnimationFrame(draw)
-    }, 10)
+    // intervalID = setInterval(() => {
+    //     requestAnimationFrame(draw)
+    // }, 10)
 }
 
-// add your score text
-ctx.font = '20px Verdana'
-ctx.fillText('Score: ' + score, 20, 20)
- 
-
-window.addEventListener('load', () => {
+function gameWin(){
     canvas.style.display = 'none'
-startBtn.addEventListener('click', () => {
-        startGame()
-    })
+    startscreen.style.display = "none"
+    gameOverscreen.style.display = "none"
+    gameWinscreen.style.display = "block"
+    restartBtn.style.display = 'block'
+    // intervalID = setInterval(() => {
+    //     requestAnimationFrame(draw)
+    // }, 10)
+}
 
-})
+
+// add your score text
+// ctx.font = '20px Verdana'
+// ctx.fillText('Score: ' + score, 20, 20)
+
 
 // window.addEventListener('load', () => {
-//     canvas.style.display = 'none'
+//     canvas.style.display = 'block'
+//     startscreen.style.display = "none"
+//     gameOverscreen.style.display = "none"
 
-// startBtn.addEventListener('click', () => {
+//     restartBtn.addEventListener('click', () => {
 //         startGame()
 //     })
 
 // })
+
+window.addEventListener('load', () => {
+    canvas.style.display = 'none'
+    startscreen.style.display = "block"
+    gameOverscreen.style.display = "none"
+    gameWinscreen.style.display = "none"
+
+    startBtn.addEventListener('click', () => {
+        startGame()
+    })
+})
+
+window.addEventListener('reload', () => {
+    canvas.style.display = 'block'
+    startscreen.style.display = "none"
+    gameOverscreen.style.display = "none"
+    gameWinscreen.style.display = "none"
+
+    restartBtn.addEventListener('click', () => {
+        // restart()
+        startGame()
+    })
+})

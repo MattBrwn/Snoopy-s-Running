@@ -4,33 +4,39 @@ body {
   }
   
 body {
-    background-image: url("../images/startscreen.jpeg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-size: 100%;
+    
     width: 100%;
     height: 100%;
     margin: 0;
 }
 
-header {
-    font-weight: normal;
+#startscreen {
+  background-image: url("../images/startscreen.jpeg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  font-weight: normal;
     font-size: 100%;
     color: white;
     text-align: center;
-    margin-top: 5%;
-    margin-left: 5%;
-    margin-bottom: 40%;
+  height: 500px;
+   
  }
+
+h1 {
+  text-align: center;
+}
+
 
 h2 {
   margin-left: 5%;
   color: white;
 }
 .Introduction {
+  margin-top: 40%;
   margin-left: 5%x;
   color: white;
   color: black;
+  text-align: left;
 }
 
 .Instructions {
@@ -38,8 +44,35 @@ h2 {
   color: white;
   margin-bottom: 7%;
   color: black;
+  text-align: center;
 }
  
-#start-game-button {
+#startgame {
   text-align: center;
   } 
+#restartgame {
+    text-align: center;
+    } 
+
+#gameoverscreen {
+  background-image: url("../images/GameOver.jpeg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  font-weight: normal;
+    font-size: 100%;
+    color: white;
+    text-align: center;
+  height: 500px;
+    }
+
+#gamewinscreen {
+  background-image: url("../images/YourTheChampion.jpeg");
+  background-size: 100%;
+  height: 850px;
+  background-repeat: no-repeat;
+  font-weight: normal;
+    font-size: 100%;
+    color: white;
+    text-align: coverr;
+  margin:0;
+    }

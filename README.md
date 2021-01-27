@@ -19,13 +19,13 @@ Snoopy is moved horizontally by cursor.
 
  ## Data structure
 
-# main
+# index.html / main
 
 - buildSplashScreen () {}
 - buildGameScreen () {}
 - buildGameOverScreen () {}
 
-# game
+# index.js
 
 - Game () {}
 - startLoop () {}
@@ -35,37 +35,37 @@ Snoopy is moved horizontally by cursor.
 - drawCanvas () {}
 - GameOver () {}
 
-# snoopy 
+  
 
 - Snoopy () {
    img
    x, y, incrX
 }
+fct drawSnoopy
 - draw () {}
 - move () {}
 
-
-# Charliebrown 
-
+# CharlieBrown
 - CharlieBrown
     img
-   rdm(x), rdm(y)
+   start position rdm(x), rdm(y)
 }
-
+fct drawSnoopy
 - draw () {}
 - rdm pos
 
-# Soccerball
+# ball
 
 - ball () {
      img
    x, y, rdm(incrX) , rdm(incrY)
 }
+fct drawSnoopy
 - draw () {}
 - move () {}
 - 
 # Collision conditions
-sidewalls (double speed and change direction)
+fct collison sidewalls (double speed and change direction)
 collision ball - snoopy -> increse score
 
 
@@ -95,6 +95,6 @@ collision ball - snoopy -> increse score
 ## Links
 
 - [Trello Link]https://docs.google.com/document/d/12G5tHbEu6s--BN-zE7DA7JGM7Z60e39XyNXbCdl5waE/edit?usp=sharing
-- [Slides Link](http://slides.com)
+- [Slides Link](https://docs.google.com/presentation/d/10YnC1RyKsmbdnvr2VImsHroho7he3Ez5G1xKd7yyZoU/edit?usp=sharing)
 - [Github repository Link](https://github.com/MattBrwn/Snoopy-s-Running)
 - [Deployment Link](http://github.com)''# Snoopy-s-Running

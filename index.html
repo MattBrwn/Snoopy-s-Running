@@ -8,19 +8,29 @@
 </head>
 
 <body>
-   
-    <!-- <header>
-        <h1>Snoopy's Running</h1>
-    </header>
-
-    <h2 class ="Introduction"> Introduction
-    </h2> 
+   <div id="startscreen">
+    <h1>Snoopy's Running</h1>
+    <h2 class ="Introduction">Introduction</h2> 
     <p class = "Instructions">
         Charlie Brown is kicking the ball and Snoopy has to catch it. <br> Use the left and right arrow for Snoopy to catch the ball!
-    </p> -->
+    </p>
     <button id="startgame">START to GAME</button>
-    <!-- <audio src="./sounds/509983__blakengouda__kick-10.mp3" id="kickingsound"></audio> -->
+</div>
 
+<div id="gameoverscreen">
+        <h1>Game over!</h1>
+        <p class = "Instructions">
+        </p>
+        <button id="restartgame">Restart GAME</button>
+    </div>
+
+<div id="gamewinscreen">
+        <h1>You'r a Winner!</h1>
+        <p class = "Instructions">
+            Like to restart?
+        </p>
+        <button id="restartgame">Restart GAME</button>
+</div>
     <canvas id="canvas" width="600" height="800"></canvas>       
     <script src="index.js"></script>
 </body>
