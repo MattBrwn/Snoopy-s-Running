@@ -44,7 +44,8 @@ let gameWinscreen = document.getElementById('gamewinscreen')
 
 
 let startBtn = document.querySelector('#startgame')
-let restartBtn = document.querySelector('#startgame')
+let restartBtnLose = document.querySelector('#restartgamelose')
+let restartBtnWin = document.querySelector('#restartgamewin')
 
 document.addEventListener('keydown', (event) => {
     
@@ -63,6 +64,20 @@ document.addEventListener('keydown', (event) => {
 document.addEventListener('keyup', (event) => {
     isRightArrow = false;
     isLeftArrow = false;
+})
+
+
+restartBtnLose.addEventListener('click', ()=>{
+    //Setting everything back to normal with a function
+    restartgame()
+    console.log('Works')
+    
+})
+
+restartBtnWin.addEventListener('click', ()=>{
+    //Setting everzthing back to 0 with a function
+    console.log('Works')
+    restartgame()
 })
 
 function ballCollision(){
@@ -130,6 +145,7 @@ function draw(){
 
 
 function startGame(){
+
     canvas.style.display = 'block'
     startBtn.style.display = 'none'
     startscreen.style.display = "none"
@@ -156,21 +172,50 @@ function gameOver(){
     */
     gameOverscreen.style.display = "block"
     gameWinscreen.style.display = "none"
-    startBtn.style.display = 'block'
-    // intervalID = setInterval(() => {
-    //     requestAnimationFrame(draw)
-    // }, 10)
+    
+
+
 }
+
+function restartgame(){
+   
+    canvas.style.display = "block"
+     gameOverscreen.style.display = "none"
+     charliebrownX = 20 + (canvas.width-50) * Math.random();
+     charliebrownY = 2;
+
+     ballX = charliebrownX + 40;
+     ballY = charliebrownY + 48;
+
+     ballincrementX = (Math.round(Math.random(1)) * 2 - 1) * (2 + (Math.random(1.5)));
+     ballincrementY = 2.5 + Math.random(1);
+
+     snoopyX = (canvas.width-50) * Math.random();
+     snoopyY = 735;
+     snoopyWidth = 60;
+     incrementxSnoopy = 5;
+
+     isLeftArrow = false;
+     isRightArrow = false;
+     score = 0;
+     intervalID= 0;  
+    startGame()
+}
+
+
 
 function gameWin(){
     canvas.style.display = 'none'
     startscreen.style.display = "none"
     gameOverscreen.style.display = "none"
     gameWinscreen.style.display = "block"
-    restartBtn.style.display = 'block'
+    //restartBtn.style.display = 'block'
     // intervalID = setInterval(() => {
     //     requestAnimationFrame(draw)
     // }, 10)
+
+  
+
 }
 
 
