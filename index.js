@@ -13,17 +13,19 @@ let charliebrownX = 20 + 550 * Math.random();
 let charliebrownY = 2;
 let charliebrownImg = new Image();
     charliebrownImg.src = './images/CBrown.png'
+let balls = [];
+let count = 0;
 
-let ballX = charliebrownX + 40;
-let ballY = charliebrownY + 48;
-let ballWidth = 20;
-let ballincrementX = (Math.round(Math.random(1)) * 2 - 1) * (1 + (Math.random(0.8)));
-let ballincrementY = 2 + Math.random(1);
-let numberOfBalls = 1
-let ballImg = new Image();
-    ballImg.src = './images/ball.PNG'
-let numbersofLostballs = 0;
-let numberofWonballs = 0;
+function createBall(){
+    charliebrownX = 20 + 550 * Math.random();
+    let ballincrementX = (Math.round(Math.random(1)) * 2 - 1) * (1 + (Math.random(0.8)));
+    let ballincrementY = 2 + Math.random(1);
+    console.log("create ball")
+    balls.push(new Ball (charliebrownX + 40, charliebrownY + 48, ballincrementX, ballincrementY) )
+}
+createBall()
+// let numbersofLostballs = 0;
+// let numberofWonballs = 0;
 
 let snoopyX = 100 + (canvas.width-150) * Math.random();
 let snoopyY = (canvas.height-65);
@@ -81,39 +83,6 @@ document.addEventListener('keyup', (event) => {
     isLeftArrow = false;
 })
 
-
-
-
-function ballCollision(){
-    
-    // check for right side
-    if (ballX+20 > canvas.width) {
-        // change balldirection
-        ballincrementX = (-1.2)*ballincrementX;
-    }  
-    
-    //check for left side
-    if (ballX < 0) {
-        ballincrementX = (-1.5)*ballincrementX;
-    }
-    
-    // check for bottom
-    if (ballY >= canvas.height-40) {
-        // something here 
-        if (ballX + ballWidth > snoopyX && ballX > snoopyX + snoopyWidth || ballX < snoopyX + snoopyWidth && ballX +ballWidth < snoopyX) {
-            clearInterval(intervalID)
-            gameOver()
-        }
-        else {
-            clearInterval(intervalID)
-            gameWin()
-            }
-        }
-    }
-
-    
-
-
 function drawSnoopy(){
     ctx.drawImage(snoopyImg, snoopyX, snoopyY, 60, 60)
 }
@@ -122,28 +91,47 @@ function drawCharliebrown(){
     ctx.drawImage(charliebrownImg, charliebrownX, charliebrownY, 70, 70);
 }
 
-function drawBall(){
-    ctx.drawImage(ballImg, ballX, ballY, 20, 20)
+function drawBall(ball){  
+    let ballImg = document.createElement('img');
+    ballImg.src = './images/Ball2.png'
+    ctx.drawImage(ballImg, ball.x, ball.y)
 }
 
 function draw(){
     ctx.clearRect(0, 0, canvas.width, canvas.height) 
+    // ctx.font = '24px Verdana'
+    // ctx.fillText('Score:' + score, 20, 20)
+    
     drawCharliebrown()
-    drawBall()
     drawSnoopy()
-    ballCollision()
+    balls.forEach(ball=> { 
+        if (!ball.isCatched) {
+            drawBall(ball);
+        
+        ball.x += ball.velox;
+        ball.y += ball.veloy;
+        }
+        ballCollision(ball);
+    if (ball.y > canvas.height-200 && !ball.isNext) {
+        ball.isNext = true;
+        if (balls.length < 6) {
+            createBall()
+        }
+    } 
+    })
+   
+   
     
     
     // movement Snoopy
-    if (isRightArrow && (snoopyX < canvas.width)) {
+    if (isRightArrow && (snoopyX < canvas.width-60)) {
         snoopyX += incrementxSnoopy
     }
     else if (isLeftArrow && snoopyX > 0) {
         snoopyX -= incrementxSnoopy
     }
     // ball movement
-    ballX += ballincrementX
-    ballY += ballincrementY
+    
 }
 
 
@@ -158,6 +146,42 @@ function startGame(){
         requestAnimationFrame(draw)
     }, 10)
 }
+
+function ballCollision(ball){
+    
+    // check for right side
+    if (ball.x+15 > canvas.width) {
+        // change balldirection
+        ball.velox= (-1.2)*ball.velox;
+    }  
+    
+    //check for left side
+    if (ball.x < 0) {
+        ball.velox = (-1.5)*ball.velox;
+    }
+    
+    // check for bottom
+    if (ball.y >= canvas.height-40 && !ball.isCatched) {
+        // something here 
+        if (ball.x + 20 > snoopyX && ball.x > snoopyX + snoopyWidth || 
+            ball.x < snoopyX + snoopyWidth && ball.x + 20 < snoopyX) {
+            clearInterval(intervalID)
+            gameOver()
+        }
+        else {
+         if (!ball.isCatched) {
+             count ++;
+             ball.isCatched = true;
+         }   
+            if (count == 6) {
+                clearInterval(intervalID)
+                gameWin()
+            }
+            
+            }
+        }
+    }
+
 
 function gameOver(){
     canvas.style.display = 'none'
@@ -182,11 +206,8 @@ function restartgame(){
      charliebrownX = 20 + (canvas.width-50) * Math.random();
      charliebrownY = 2;
 
-     ballX = charliebrownX + 40;
-     ballY = charliebrownY + 48;
-
-     ballincrementX = (Math.round(Math.random(1)) * 2 - 1) * (2 + (Math.random(1.5)));
-     ballincrementY = 2.5 + Math.random(1);
+     balls= [];
+     createBall()
 
      snoopyX = (canvas.width-50) * Math.random();
      snoopyY = 735;
@@ -198,7 +219,6 @@ function restartgame(){
     //  score = 0;
      intervalID= 0;  
     startGame()
-    console.log(numberOfBalls)
 }
 
 
