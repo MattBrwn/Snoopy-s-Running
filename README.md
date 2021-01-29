@@ -35,8 +35,6 @@ Snoopy is moved horizontally by cursor.
 - drawCanvas () {}
 - GameOver () {}
 
-  
-
 - Snoopy () {
    img
    x, y, incrX
@@ -54,22 +52,21 @@ fct drawSnoopy
 - draw () {}
 - rdm pos
 
-# ball
+# balls (as seperate js-File)
 
-- ball () {
+- class balls () {
      img
-   x, y, rdm(incrX) , rdm(incrY)
+   x, y, rdm(xvelo, yvelo) , rdm(incvelo)
 }
-fct drawSnoopy
-- draw () {}
-- move () {}
-- 
+fct generation of balls
+- implement conditions
+ 
 # Collision conditions
-fct collison sidewalls (double speed and change direction)
-collision ball - snoopy -> increse score
+fct collison sidewalls (increased speed)
+collision ball
 
 
-## States y States Transitions
+## States Transitions
 - splashScreen
 - gameScreen
 - gameOverScreen
@@ -95,6 +92,6 @@ collision ball - snoopy -> increse score
 ## Links
 
 - [Trello Link]https://docs.google.com/document/d/12G5tHbEu6s--BN-zE7DA7JGM7Z60e39XyNXbCdl5waE/edit?usp=sharing
-- [Slides Link](https://docs.google.com/presentation/d/10YnC1RyKsmbdnvr2VImsHroho7he3Ez5G1xKd7yyZoU/edit?usp=sharing)
+- [Slides Link](https://docs.google.com/presentation/d/1NBzJCHJGB4cTD7d-yAMv8Ach2O4YxGPbIY1lvpq8GA8/edit?usp=sharing)
 - [Github repository Link](https://github.com/MattBrwn/Snoopy-s-Running)
 - [Deployment Link](http://github.com)''# Snoopy-s-Running
